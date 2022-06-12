@@ -21,14 +21,14 @@ class MainTabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
             view.backgroundColor = .white
-        
+            
     }
     
 
     
      func setupControllers(){
-       
-        let profileViewController = ProfileViewController()
+        
+        let profileViewController = LogInViewController()
         let profileNavController = UINavigationController(rootViewController: profileViewController)
         let feedViewController = FeedViewController()
         let feedNavController = UINavigationController(rootViewController: feedViewController)

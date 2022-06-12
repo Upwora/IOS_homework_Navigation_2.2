@@ -7,10 +7,19 @@
 
 import UIKit
 
-class TestUIview: UIView {
-
+class headerView: UIView {
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+      //  layout()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     var avatarImageView: UIImageView = {
-        let view = UIImageView()//frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        let view = UIImageView()
         view.image = UIImage(named: "Vinchi-Leonardo-Da")
         //view.contentMode = .scaleAspectFit
         view.clipsToBounds = true
@@ -66,4 +75,40 @@ class TestUIview: UIView {
         return button
     }()
 
+    func layout() {
+//        
+        addSubview(avatarImageView)
+        addSubview(fullNameLabel)
+        addSubview(statusLabel)
+        addSubview(statusTextField)
+        addSubview(button)
+        
+        NSLayoutConstraint.activate([
+            avatarImageView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16),
+            avatarImageView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 16),
+            avatarImageView.heightAnchor.constraint(equalToConstant: 100),
+            avatarImageView.widthAnchor.constraint(equalToConstant: 100),
+            
+            fullNameLabel.leftAnchor.constraint(equalTo: avatarImageView.rightAnchor, constant: 16),
+            fullNameLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -10),
+            fullNameLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 15),
+            fullNameLabel.heightAnchor.constraint(equalToConstant: 50),
+       
+            statusLabel.leftAnchor.constraint(equalTo:  avatarImageView.rightAnchor, constant: 16),
+            statusLabel.topAnchor.constraint(equalTo:  fullNameLabel.bottomAnchor, constant: 30),
+            statusLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -16),
+            
+            statusTextField.leftAnchor.constraint(equalTo: avatarImageView.rightAnchor, constant: 16),
+            statusTextField.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -16),
+            statusTextField.widthAnchor.constraint(equalToConstant: 100),
+            statusTextField.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 120),
+            
+            button.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16),
+            button.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -16),
+            button.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 160)
+        ])
+        
+
+    }
+    
 }
