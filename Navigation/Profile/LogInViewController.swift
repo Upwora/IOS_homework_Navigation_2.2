@@ -7,24 +7,6 @@
 
 import UIKit
 
-extension UIColor {
-   convenience init(red: Int, green: Int, blue: Int) {
-       assert(red >= 0 && red <= 255, "Invalid red component")
-       assert(green >= 0 && green <= 255, "Invalid green component")
-       assert(blue >= 0 && blue <= 255, "Invalid blue component")
-
-       self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: 1.0)
-   }
-
-   convenience init(rgb: Int) {
-       self.init(
-           red: (rgb >> 16) & 0xFF,
-           green: (rgb >> 8) & 0xFF,
-           blue: rgb & 0xFF
-       )
-   }
-}
-
 class LogInViewController: UIViewController {
     
     override func viewDidLoad() {
@@ -79,6 +61,8 @@ class LogInViewController: UIViewController {
     
     var fullNameLabel: UILabel = {
     let view = UILabel()
+
+        
     view.text = "Leonardo Da Vinci"
     view.font = UIFont(name: "Helvetica-Bold", size: 18)
     view.backgroundColor = UIColor(named: "4885CC")
@@ -104,7 +88,7 @@ class LogInViewController: UIViewController {
         view.borderStyle = .roundedRect
         view.backgroundColor = .systemGray6
         view.text = "Email or phone"
-        view.textColor = .black
+        view.textColor = .lightGray
         view.layer.borderWidth = 0.5
         view.layer.borderColor = UIColor.black.cgColor
         view.layer.cornerRadius = 10
@@ -120,7 +104,7 @@ class LogInViewController: UIViewController {
         view.borderStyle = .roundedRect
         view.backgroundColor = .systemGray6
         view.text = "Password"
-        view.textColor = .black
+        view.textColor = .lightGray
         view.delegate = self
         view.layer.borderWidth = 0.5
         view.layer.borderColor = UIColor.black.cgColor
@@ -162,18 +146,18 @@ class LogInViewController: UIViewController {
         logoImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
       
         emailTextField.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 120).isActive = true
-        emailTextField.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -16).isActive = true
-        emailTextField.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16).isActive = true
+        emailTextField.rightAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.rightAnchor, constant: -16).isActive = true
+        emailTextField.leftAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leftAnchor, constant: 16).isActive = true
         emailTextField.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
         passTextField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: -1).isActive = true
-        passTextField.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -16).isActive = true
-        passTextField.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16).isActive = true
+        passTextField.rightAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.rightAnchor, constant: -16).isActive = true
+        passTextField.leftAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leftAnchor, constant: 16).isActive = true
         passTextField.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
         button.topAnchor.constraint(equalTo: passTextField.bottomAnchor, constant: 16).isActive = true
-        button.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -16).isActive = true
-        button.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16).isActive = true
+        button.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -16).isActive = true
+        button.leftAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leftAnchor, constant: 16).isActive = true
         button.heightAnchor.constraint(equalToConstant: 50).isActive = true
         button.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
 

@@ -30,16 +30,16 @@ class MainTabBarViewController: UITabBarController {
         
         let profileViewController = LogInViewController()
         let profileNavController = UINavigationController(rootViewController: profileViewController)
-        let feedViewController = FeedViewController()
-        let feedNavController = UINavigationController(rootViewController: feedViewController)
+//        let feedViewController = FeedViewController()
+//        let feedNavController = UINavigationController(rootViewController: feedViewController)
          
-        feedViewController.tabBarItem.title = "Feed"
-        feedViewController.tabBarItem.image = UIImage(systemName: "list.bullet.rectangle.portrait")
+//        feedViewController.tabBarItem.title = "Feed"
+//        feedViewController.tabBarItem.image = UIImage(systemName: "list.bullet.rectangle.portrait")
         profileViewController.tabBarItem.title = "Profile"
         profileViewController.tabBarItem.image = UIImage(systemName: "house.circle.fill")
         
          
-        viewControllers = [feedNavController,profileNavController]
+        viewControllers = [profileNavController]
         
         
     }
