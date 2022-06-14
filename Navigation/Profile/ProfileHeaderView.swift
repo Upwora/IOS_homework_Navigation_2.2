@@ -7,6 +7,7 @@
 
 import UIKit
 
+<<<<<<< HEAD
 class ProfileHeaderView: UIView {
     
     override init(frame: CGRect) {
@@ -27,6 +28,14 @@ class ProfileHeaderView: UIView {
     var avatarImageView: UIImageView = {
         let view = UIImageView()
         view.image = UIImage(named: "Vinchi-Leonardo-Da")
+=======
+class TestUIview: UIView {
+
+    var avatarImageView: UIImageView = {
+        let view = UIImageView()//frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        view.image = UIImage(named: "Vinchi-Leonardo-Da")
+        //view.contentMode = .scaleAspectFit
+>>>>>>> 6f15d0b34be0775964bace96fe2e02c2fcdb3a2a
         view.clipsToBounds = true
         view.layer.masksToBounds = true
         view.layer.borderWidth = 3
@@ -51,7 +60,10 @@ class ProfileHeaderView: UIView {
     view.text = "Learning never exhausts the mind."
     view.font = UIFont(name: "Helvetica", size: 14)
     view.translatesAutoresizingMaskIntoConstraints = false
+<<<<<<< HEAD
         
+=======
+>>>>>>> 6f15d0b34be0775964bace96fe2e02c2fcdb3a2a
     return view
 }()
     
@@ -77,6 +89,7 @@ class ProfileHeaderView: UIView {
         button.backgroundColor = .systemBlue
         button.layer.cornerRadius = 10
         button.layer.shadowOffset.height = 10
+<<<<<<< HEAD
         return button
     }()
 
@@ -109,4 +122,10 @@ class ProfileHeaderView: UIView {
         
 
     }
+=======
+  //      button.addTarget(self, action: #selector(tapAction), for: .touchUpInside)
+        return button
+    }()
+
+>>>>>>> 6f15d0b34be0775964bace96fe2e02c2fcdb3a2a
 }

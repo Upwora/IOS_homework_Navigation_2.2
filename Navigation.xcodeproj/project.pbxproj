@@ -13,6 +13,10 @@
 		6D823A04284207370079AEC9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D823A03284207370079AEC9 /* ViewController.swift */; };
 		6D823A09284207380079AEC9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6D823A08284207380079AEC9 /* Assets.xcassets */; };
 		6D823A0C284207380079AEC9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6D823A0A284207380079AEC9 /* LaunchScreen.storyboard */; };
+<<<<<<< HEAD
+=======
+		6D823A1428421C6D0079AEC9 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D823A1328421C6D0079AEC9 /* FeedViewController.swift */; };
+>>>>>>> 6f15d0b34be0775964bace96fe2e02c2fcdb3a2a
 		6D823A18284220BA0079AEC9 /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D823A17284220BA0079AEC9 /* MainTabBarViewController.swift */; };
 		6D823A1A2842244B0079AEC9 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D823A192842244B0079AEC9 /* PostViewController.swift */; };
 		91279E7628423832003CEC48 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91279E7528423832003CEC48 /* Post.swift */; };
@@ -28,6 +32,10 @@
 		6D823A08284207380079AEC9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6D823A0B284207380079AEC9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6D823A0D284207380079AEC9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+<<<<<<< HEAD
+=======
+		6D823A1328421C6D0079AEC9 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
+>>>>>>> 6f15d0b34be0775964bace96fe2e02c2fcdb3a2a
 		6D823A17284220BA0079AEC9 /* MainTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
 		6D823A192842244B0079AEC9 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		91279E7528423832003CEC48 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
@@ -66,6 +74,10 @@
 			children = (
 				6D823A4028451F2C0079AEC9 /* Profile */,
 				6D8239FF284207370079AEC9 /* AppDelegate.swift */,
+<<<<<<< HEAD
+=======
+				6D823A1328421C6D0079AEC9 /* FeedViewController.swift */,
+>>>>>>> 6f15d0b34be0775964bace96fe2e02c2fcdb3a2a
 				6D823A03284207370079AEC9 /* ViewController.swift */,
 				6D823A192842244B0079AEC9 /* PostViewController.swift */,
 				6D823A17284220BA0079AEC9 /* MainTabBarViewController.swift */,
@@ -158,6 +170,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				6D823A1A2842244B0079AEC9 /* PostViewController.swift in Sources */,
+<<<<<<< HEAD
+=======
+				6D823A1428421C6D0079AEC9 /* FeedViewController.swift in Sources */,
+>>>>>>> 6f15d0b34be0775964bace96fe2e02c2fcdb3a2a
 				6D0248B9285348DC00A0E08D /* ProfileViewController.swift in Sources */,
 				6D823A04284207370079AEC9 /* ViewController.swift in Sources */,
 				6D0248B7285342A100A0E08D /* ProfileHeaderView.swift in Sources */,
