@@ -24,3 +24,9 @@ extension UIColor {
        )
    }
 }
+
+extension UIView {
+    static var identifier: String {
+        return String(describing: self)
+    }
+}
