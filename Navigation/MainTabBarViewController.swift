@@ -11,7 +11,8 @@ class MainTabBarViewController: UITabBarController {
     
     init() {
         super.init(nibName: nil, bundle: nil)
-        self.setupControllers()
+        setupControllers()
+        navigationItem.title = "Profile"
     }
     
     required init?(coder: NSCoder) {
@@ -20,26 +21,29 @@ class MainTabBarViewController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .gray
+            view.backgroundColor = .white
         
-        // Do any additional setup after loading the view.
+        
     }
     
+
     
-    private func setupControllers(){
-       // let tabBarController = UITabBarController()
-        
-        let feedViewController = FeedViewController()
+     func setupControllers(){
+       
         let profileViewController = ProfileViewController()
         let profileNavController = UINavigationController(rootViewController: profileViewController)
-        let feedNavController = UINavigationController(rootViewController: feedViewController)
-       
-        feedViewController.tabBarItem.title = "Feed"
-        feedViewController.tabBarItem.image = UIImage(systemName: "list.bullet.rectangle.portrait")
+//        let feedViewController = FeedViewController()
+//        let feedNavController = UINavigationController(rootViewController: feedViewController)
+//
+//        feedViewController.tabBarItem.title = "Feed"
+//        feedViewController.tabBarItem.image = UIImage(systemName: "list.bullet.rectangle.portrait")
         profileViewController.tabBarItem.title = "Profile"
         profileViewController.tabBarItem.image = UIImage(systemName: "house.circle.fill")
         
-        viewControllers = [profileNavController,feedNavController]
+         
+        viewControllers = [profileNavController]
+        
+        
     }
 
 }
