@@ -10,13 +10,15 @@ class ProfileViewController: UIViewController {
 
     private let post: [[Post]] = Post.postView()
     
+    
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.rowHeight = UITableView.automaticDimension
+       // tableView.rowHeight = UITableView.automaticDimension
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.identifier)
+        tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: PhotosTableViewCell.identifier)
         return tableView
     }()
 
@@ -38,37 +40,21 @@ class ProfileViewController: UIViewController {
 }
 
 extension ProfileViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        UITableView.automaticDimension
-    }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = ProfileTableHederView()
-      //  let text = "Это хедер секции \(section)"
-    //    header.setupHeader(text: text)
         if section == 0 { return header } else { return UIView() }
-        
-        // return header
+
     }
-//
-//    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-//        let header = CustomHeaderView()
-//        let text = "Это футор секции \(section)"
-//        header.setupHeader(text: text)
-//        return header
-//    }
-//
-//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        section % 2 == 0 ? 150 : 50
-//    }
-//
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-////        tableView.deselectRow(at: indexPath, animated: true)
-//        let detailVC = DetailViewController()
-//        detailVC.setupVC(model: carModel[indexPath.section][indexPath.row])
-//        navigationController?.pushViewController(detailVC, animated: true)
-//        present(detailVC, animated: true)
-//    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+        let detailVC = PhotosViewController()
+        detailVC.setupVC(model: post[indexPath.section][indexPath.row])
+
+        navigationController?.pushViewController(detailVC, animated: true)
+
+    }
 }
 
 extension ProfileViewController: UITableViewDataSource {
@@ -83,17 +69,23 @@ extension ProfileViewController: UITableViewDataSource {
 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//                let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
-//                var context: UIListContentConfiguration = cell.defaultContentConfiguration()
-//                context.text = "Секция = \(indexPath.section), ячейка = \(indexPath.row)"
         
+        let photoCell = tableView.dequeueReusableCell(withIdentifier: PhotosTableViewCell.identifier, for: indexPath) as! PhotosTableViewCell
         
         let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.identifier, for: indexPath) as! PostTableViewCell
         
-      //  context.image = [indexPath.section
-        //        context.image = Post[indexPath.row].image
-                cell.setupCell(post[indexPath.section][indexPath.row])
-                return cell
+        
+        var context: UIListContentConfiguration = cell.defaultContentConfiguration()
+        context.text = "Photo" //"Секция = \(indexPath.section), ячейка = \(indexPath.row)"
+        cell.setupCell(post[indexPath.section][indexPath.row])
+        
+        var photoContext: UIListContentConfiguration = photoCell.defaultContentConfiguration()
+        photoContext.text = "Photos" //"Секция = \(indexPath.section), ячейка = \(indexPath.row)"
+        
+        photoCell.setupPhotoCell(text:  photoContext.text ?? "default")
+        
+        if indexPath.section == 0 { return photoCell } else
+        { return cell }
         
     }
 }

@@ -173,7 +173,6 @@ class LogInViewController: UIViewController {
     }
     
     
-    
 }
 
 extension LogInViewController: UITextFieldDelegate {

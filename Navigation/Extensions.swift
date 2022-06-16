@@ -30,3 +30,16 @@ extension UIView {
         return String(describing: self)
     }
 }
+
+extension UIViewController {
+    func makeCollectionView(scrollDirection: UICollectionView.ScrollDirection) -> UICollectionView {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = scrollDirection
+        
+        let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collection.translatesAutoresizingMaskIntoConstraints = false
+        collection.backgroundColor = .systemGray3
+        collection.register(PhotosCollectionViewCell.self, forCellWithReuseIdentifier: PhotosCollectionViewCell.identifier)
+        return collection
+    }
+}

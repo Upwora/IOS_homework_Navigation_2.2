@@ -19,10 +19,9 @@ class PostTableViewCell: UITableViewCell {
     private let postTitle: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-     //   label.backgroundColor = .systemGray4
         label.text = "nameLabel"
         label.numberOfLines = 2
-        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.font = UIFont.boldSystemFont(ofSize: 24)
         
         return label
     }()
@@ -67,7 +66,6 @@ class PostTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         layout()
-        customizeCell()
     }
     
     required init?(coder: NSCoder) {
@@ -81,12 +79,6 @@ class PostTableViewCell: UITableViewCell {
         likesLabel.text = "Likes: " + String(model.likes)
         viewsLabel.text = "Views: " + String(model.views)
          
-    }
-    
-    private func customizeCell() {
-//        whiteView.layer.cornerRadius = 10
-//        whiteView.layer.borderWidth = 2
-//        whiteView.layer.borderColor = UIColor.black.cgColor
     }
     
     private func layout() {

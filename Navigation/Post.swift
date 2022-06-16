@@ -12,6 +12,7 @@ struct Post {
    static func postView () -> [[Post]]{
     //    var postItem = [Post]()
         var postComposition = [[Post]]()
+       postComposition.append([Post(title: "", author: "", description: "", image: "PicProfile", likes: 0, views: 0)])
         
        postComposition.append([Post(title: "Early life (1452–1472)",
                              author: "Birth and background",
@@ -42,10 +43,6 @@ struct Post {
                            views: 120)])
        
        
-       
-//        for i in 0...1 {
-//            postComposition.append((postItem[i]))
-//        }
         return postComposition
     }
 }
