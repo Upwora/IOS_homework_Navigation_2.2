@@ -7,15 +7,22 @@
 
 import UIKit
 
-class PhotosTableViewCell: UITableViewCell {
+protocol CellActionsDelegate: AnyObject {
+    func Action()
+}
 
+class PhotosTableViewCell: UITableViewCell {
+let gallery = PhotosViewController()
+    
+    weak var delegate: CellActionsDelegate?
+    
     private let photoButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.contentMode = .scaleAspectFit
         button.tintColor = .black
         button.setBackgroundImage(UIImage(systemName: "arrow.right.square"), for: .normal)
-   //     button.addTarget(self, action: #selector(tapAction), for: .touchUpInside)
+        button.addTarget(self, action: #selector(tapGalleryButtonAction), for: .touchUpInside)
         return button
     }()
     
@@ -70,6 +77,12 @@ class PhotosTableViewCell: UITableViewCell {
         
     }
     
+    @objc private func tapGalleryButtonAction() {
+    
+        delegate?.Action()
+        
+    }
+    
     func setupPhotoCell(text: String) {
         photoLabel.text = text
         postImageView.image = UIImage(named: "photo-1599894019794-50339c9ad89c")
@@ -94,6 +107,8 @@ class PhotosTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    
+    
     private func layout() {
         
         let screenSize: CGRect = UIWindow().frame
@@ -117,7 +132,7 @@ class PhotosTableViewCell: UITableViewCell {
             photoButton.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -screenOffset),
             photoButton.bottomAnchor.constraint(equalTo: postImageView.topAnchor, constant: -screenOffset),
             
-            postImageView.topAnchor.constraint(equalTo: photoLabel.bottomAnchor, constant: screenOffset),
+            postImageView.topAnchor.constraint(equalTo: photoLabel.bottomAnchor, constant: offset ),
             postImageView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: screenOffset),
             postImageView.rightAnchor.constraint(equalTo: postImageSecond.leftAnchor, constant: -offset),
             postImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),

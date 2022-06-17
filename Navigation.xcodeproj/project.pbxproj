@@ -53,6 +53,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6D0248CC285C57C300A0E08D /* PhotoGallery */ = {
+			isa = PBXGroup;
+			children = (
+				6D0248C8285B2EB200A0E08D /* PhotosViewController.swift */,
+				6D0248C6285999C200A0E08D /* PhotosTableViewCell.swift */,
+				6D0248C2285844C700A0E08D /* PostTableViewCell.swift */,
+				6D0248CA285B3C5F00A0E08D /* PhotosCollectionViewCell.swift */,
+			);
+			path = PhotoGallery;
+			sourceTree = "<group>";
+		};
+		6D0248CD285C581700A0E08D /* PostManagement */ = {
+			isa = PBXGroup;
+			children = (
+				6D823A192842244B0079AEC9 /* PostViewController.swift */,
+				6D823A17284220BA0079AEC9 /* MainTabBarViewController.swift */,
+				91279E7528423832003CEC48 /* Post.swift */,
+				6D8239FF284207370079AEC9 /* AppDelegate.swift */,
+			);
+			path = PostManagement;
+			sourceTree = "<group>";
+		};
 		6D8239F3284207370079AEC9 = {
 			isa = PBXGroup;
 			children = (
@@ -72,16 +94,9 @@
 		6D8239FE284207370079AEC9 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				6D0248CC285C57C300A0E08D /* PhotoGallery */,
 				6D823A4028451F2C0079AEC9 /* Profile */,
-				6D8239FF284207370079AEC9 /* AppDelegate.swift */,
-				6D0248C428589CF100A0E08D /* ProfileTableHederView.swift */,
-				6D823A192842244B0079AEC9 /* PostViewController.swift */,
-				6D823A17284220BA0079AEC9 /* MainTabBarViewController.swift */,
-				91279E7528423832003CEC48 /* Post.swift */,
-				6D0248C6285999C200A0E08D /* PhotosTableViewCell.swift */,
-				6D0248C8285B2EB200A0E08D /* PhotosViewController.swift */,
-				6D0248C2285844C700A0E08D /* PostTableViewCell.swift */,
-				6D0248CA285B3C5F00A0E08D /* PhotosCollectionViewCell.swift */,
+				6D0248CD285C581700A0E08D /* PostManagement */,
 				6D823A08284207380079AEC9 /* Assets.xcassets */,
 				6D823A0A284207380079AEC9 /* LaunchScreen.storyboard */,
 				6D823A0D284207380079AEC9 /* Info.plist */,
@@ -95,6 +110,7 @@
 				6D0248B8285348DC00A0E08D /* ProfileViewController.swift */,
 				6D0248BE2855183B00A0E08D /* LogInViewController.swift */,
 				6D0248C0285772AD00A0E08D /* Extensions.swift */,
+				6D0248C428589CF100A0E08D /* ProfileTableHederView.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";

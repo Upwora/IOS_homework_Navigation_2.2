@@ -6,10 +6,17 @@
 //
 
 import UIKit
-class ProfileViewController: UIViewController {
+class ProfileViewController: UIViewController, CellActionsDelegate {
+    func Action() {
+        print("Arrow Pressed")
+        let vc = PhotosViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
 
     private let post: [[Post]] = Post.postView()
     
+    var animator = UIViewPropertyAnimator()
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
@@ -19,9 +26,21 @@ class ProfileViewController: UIViewController {
        // tableView.rowHeight = UITableView.automaticDimension
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.identifier)
         tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: PhotosTableViewCell.identifier)
+        //tableView.addTarget(self, action: #selector(tapAction), for: .touchUpInside)
         return tableView
     }()
 
+    private func setupGestures() {
+      
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapAction))
+        tableView.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc private func tapAction(gesture: UIPinchGestureRecognizer) {
+        tableView.transform = tableView.transform.scaledBy(x: gesture.scale, y: gesture.scale)
+        gesture.scale = 1
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         layout()
@@ -50,7 +69,6 @@ extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         let detailVC = PhotosViewController()
-        detailVC.setupVC(model: post[indexPath.section][indexPath.row])
 
         navigationController?.pushViewController(detailVC, animated: true)
 
@@ -71,7 +89,7 @@ extension ProfileViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let photoCell = tableView.dequeueReusableCell(withIdentifier: PhotosTableViewCell.identifier, for: indexPath) as! PhotosTableViewCell
-        
+        photoCell.delegate = self
         let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.identifier, for: indexPath) as! PostTableViewCell
         
         

@@ -10,10 +10,7 @@ import UIKit
 class PhotosViewController: UIViewController {
     
     private lazy var verticalCollection = makeCollectionView(scrollDirection: .vertical)
-    
-    func setupVC (model: Post) {
-     
-    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +19,7 @@ class PhotosViewController: UIViewController {
         self.navigationItem.title = "Photo gallery"
         navigationController?.navigationBar.isHidden = false
     }
+
     
     override func viewWillDisappear(_ animated: Bool) {
         
@@ -37,6 +35,7 @@ class PhotosViewController: UIViewController {
     private func layout() {
         view.addSubview(verticalCollection)
         let screenSize: CGRect = UIWindow().frame
+        verticalCollection.backgroundColor = .white
         
         NSLayoutConstraint.activate([
             verticalCollection.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -53,7 +52,7 @@ extension PhotosViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         switch collectionView {
         case verticalCollection:
-            return galleryFile.count
+            return 1
         default:
             return 1
         }

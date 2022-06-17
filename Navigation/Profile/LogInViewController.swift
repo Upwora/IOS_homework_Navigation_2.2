@@ -167,9 +167,9 @@ class LogInViewController: UIViewController {
     @objc private func tapAction() {
     
         let vc = ProfileViewController()
-
+      
         navigationController?.pushViewController(vc, animated: true)
-
+      
     }
     
     
