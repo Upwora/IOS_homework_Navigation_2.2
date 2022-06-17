@@ -169,7 +169,23 @@ class LogInViewController: UIViewController {
         let vc = ProfileViewController()
       
         navigationController?.pushViewController(vc, animated: true)
-      
+        
+//        let alertController = UIAlertController(title: "Can't login", message: "Your login or password incorrect", preferredStyle: .alert)
+//        let yesAction = UIAlertAction(title: "Ok", style: .default) { (action) -> Void in
+//                print("The user is okay.")
+//            }
+//             
+////            let noAction = UIAlertAction(title: "No", style: .default) { (action) -> Void in
+////                print("The user is not okay.")
+////            }
+////
+//            // Add Actions
+//            alertController.addAction(yesAction)
+//    //        alertController.addAction(noAction)
+//        
+//        
+//        //navigationController?.pushViewController(alertController, animated: true)
+//        present(alertController, animated: true)
     }
     
     

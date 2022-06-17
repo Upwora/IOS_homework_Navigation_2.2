@@ -6,7 +6,13 @@
 //
 
 import UIKit
-class ProfileViewController: UIViewController, CellActionsDelegate {
+
+extension UIGestureRecognizerDelegate {
+    func setupGestures(){}
+}
+
+class ProfileViewController: UIViewController, CellActionsDelegate, UIGestureRecognizerDelegate {
+   
     func Action() {
         print("Arrow Pressed")
         let vc = PhotosViewController()
@@ -30,20 +36,12 @@ class ProfileViewController: UIViewController, CellActionsDelegate {
         return tableView
     }()
 
-    private func setupGestures() {
-      
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapAction))
-        tableView.addGestureRecognizer(tapGesture)
-    }
-    
-    @objc private func tapAction(gesture: UIPinchGestureRecognizer) {
-        tableView.transform = tableView.transform.scaledBy(x: gesture.scale, y: gesture.scale)
-        gesture.scale = 1
-    }
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
         layout()
+        setupGestures()
     }
     
     private func layout() {
