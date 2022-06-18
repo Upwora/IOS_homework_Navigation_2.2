@@ -201,26 +201,25 @@ class LogInViewController: UIViewController {
         passAnimator.stopAnimation(true)
         
         
-//        if emailTextField.text == "" || emailTextField.text == "Email or phone" {
-//            emailAnimator.startAnimation()
-//        }
-//
-//        if passTextField.text?.count ?? 0 < 6 || passTextField.text == "Password" {
-//            passAnimator.startAnimation()
-//            errorLabel.isHidden = false
-//        }
-//
-//
-//        if  emailTextField.text != "" && emailTextField.text != "Email or phone" && passTextField.text?.count ?? 0 >= 7 && emailTextField.text != "your@mail.com" && passTextField.text != "1234567" {
-//            present(alertController, animated: true)
-//
-//        } else { if emailTextField.text == "your@mail.com" && passTextField.text == "1234567" {
-//                navigationController?.pushViewController(vc, animated: true)
-//
-//            }
-//        }
-        navigationController?.pushViewController(vc, animated: true)
-        //navigationController?.pushViewController(alertController, animated: true)
+        if emailTextField.text == "" || emailTextField.text == "Email or phone" {
+            emailAnimator.startAnimation()
+        }
+
+        if passTextField.text?.count ?? 0 < 6 || passTextField.text == "Password" {
+            passAnimator.startAnimation()
+            errorLabel.isHidden = false
+        }
+
+
+        if  emailTextField.text != "" && emailTextField.text != "Email or phone" && passTextField.text?.count ?? 0 >= 7 && emailTextField.text != "your@mail.com" && passTextField.text != "1234567" {
+            present(alertController, animated: true)
+
+        } else { if emailTextField.text == "your@mail.com" && passTextField.text == "1234567" {
+                navigationController?.pushViewController(vc, animated: true)
+
+            }
+        }
+        
         
     }
     
