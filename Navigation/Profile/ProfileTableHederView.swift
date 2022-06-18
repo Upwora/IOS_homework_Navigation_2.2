@@ -9,6 +9,7 @@ import UIKit
 
 class ProfileTableHederView: UIView, UIGestureRecognizerDelegate {
 
+    let screenSize: CGRect = UIWindow().frame
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -40,6 +41,7 @@ class ProfileTableHederView: UIView, UIGestureRecognizerDelegate {
         view.layer.borderColor = UIColor.white.cgColor
         view.layer.cornerRadius = 50
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.addTarget(self, action: #selector(tapAvatarAction), for: .touchUpInside)
         //view.delegate
         return view
     }()
@@ -86,21 +88,22 @@ class ProfileTableHederView: UIView, UIGestureRecognizerDelegate {
         button.layer.shadowRadius = 104
         button.layer.shadowColor = UIColor.yellow.cgColor
         button.layer.shadowOpacity = 0.7
-       // button.addTarget(self, action: #selector(tapAction), for: .touchUpInside)
         return button
     }()
     
-    var blackView:  UIView = {
-    let blackView = UIView()
-    blackView.backgroundColor = .black
-    blackView.alpha = 0.5
-    blackView.frame = UIWindow().frame
+    var blackView:  UIButton = {
+        let blackView = UIButton()
+        blackView.backgroundColor = .black
+        blackView.alpha = 0.5
+        blackView.frame = UIWindow().frame
+        blackView.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
         return blackView
     }()
     
-    let closeButton: UIButton = {
+    private lazy var closeButton: UIButton = {
         let button = UIButton(frame: CGRect(x: 50, y: 200, width: 50, height: 50))
         button.tintColor = .white
+        button.layer.position = CGPoint(x: 50, y: 200)
         button.setBackgroundImage(UIImage(systemName: "xmark.circle"), for: .normal)
         button.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
         return button
@@ -113,14 +116,9 @@ class ProfileTableHederView: UIView, UIGestureRecognizerDelegate {
     }
     
     private func setupGestures() {
-        
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapAction))
-        tapGesture.delegate = self
-        avatarImageView.addGestureRecognizer(tapGesture)
-        
+               
         let closeGesture = UITapGestureRecognizer(target: self, action: #selector(closeAction))
-        closeGesture.delegate = self
-        closeButton.addGestureRecognizer(closeGesture)
+        blackView.addGestureRecognizer(closeGesture)
     }
     
     func pauseLayer(layer : CALayer){
@@ -140,41 +138,49 @@ class ProfileTableHederView: UIView, UIGestureRecognizerDelegate {
     }
     
     @objc private func closeAction() {
-        super.self.addSubview(closeButton)
         print("closed")
-        self.avatarImageView.removeFromSuperview()
-        self.layoutIfNeeded()
+        self.closeButton.removeFromSuperview()
+        self.blackView.removeFromSuperview()
+        UIView.animate(withDuration: 0.5) { [self] in
+//            self.avatarImageView.constant = 100
+//            //translatedBy(x: -5, y: -5)
+            self.avatarImageView.transform = avatarImageView.transform.scaledBy(x: 0.4, y: 0.4)
+            self.avatarImageView.transform = avatarImageView.transform.translatedBy(x: -(screenSize.width / 3), y: -(screenSize.height / 3))
+            self.layoutIfNeeded()
+        }
+        
+    }
+    
+    @objc private func closeAvatar() {
+        
+        print("closed from BlackView")
+        //closeButton.removeFromSuperview()
+        //self.layoutIfNeeded()
         
     }
     
     
-    @objc private func tapAction(gesture: UITapGestureRecognizer) {
-
-        let screenSize: CGRect = UIWindow().frame
-        
-        self.addSubview(blackView)
+    @objc private func tapAvatarAction() {
+       
         UIView.animate(withDuration: 1.0,
                                 delay: 0.0,
                                 usingSpringWithDamping: 2.5,
                                 initialSpringVelocity: 1.3,
                        options: .curveEaseInOut) { [self] in
             avatarImageView.transform = avatarImageView.transform.translatedBy(x: screenSize.width / 3, y: screenSize.height / 3)
+            self.addSubview(blackView)
             avatarImageView.transform = avatarImageView.transform.scaledBy(x: 3, y: 3)
-            //self.addSubview(blackView)
+            
                  } completion: { _ in
-                     UIView.animate(withDuration: 3.0,
+                     UIView.animate(withDuration: 0.2,
                                     delay: 0.0) { [self] in
                          self.addSubview(closeButton)
-                         //super.layoutIfNeeded()
-                         print("COmplition works \(gesture.state)")
-                         //self.layoutIfNeeded()
-                         //closeAction()
-                         }
+                             print("exit from animation")
+                         
+                         closeButton.layer.position = CGPoint(x: 60, y: 200)
+                                               }
                      }
                  
-
-       // print("Есть пробитие \(gesture.state)")
-        
     }
     
     func layout() {

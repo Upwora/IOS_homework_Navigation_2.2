@@ -29,10 +29,10 @@ class ProfileViewController: UIViewController, CellActionsDelegate, UIGestureRec
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.dataSource = self
         tableView.delegate = self
-       // tableView.rowHeight = UITableView.automaticDimension
+       
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.identifier)
         tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: PhotosTableViewCell.identifier)
-        //tableView.addTarget(self, action: #selector(tapAction), for: .touchUpInside)
+        
         return tableView
     }()
 
@@ -67,7 +67,7 @@ extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         let detailVC = PhotosViewController()
-
+     //   present(detailVC, animated: true)
         navigationController?.pushViewController(detailVC, animated: true)
 
     }
