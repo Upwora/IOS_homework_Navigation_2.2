@@ -175,9 +175,9 @@ class ProfileTableHederView: UIView, UIGestureRecognizerDelegate {
                             avatarImageView.transform = avatarImageView.transform.scaledBy(x: 3, y: 3)
             
                  } completion:
-                    { _ in UIView.animate(withDuration: 0.2,delay: 0.0) { [self] in self.addSubview(closeButton)
+                    { _ in UIView.animate(withDuration: 0.2,delay: 0.0) { [self] in addSubview(closeButton)
                         print("exit from animation")
-                        closeButton.layer.position = CGPoint(x: 60, y: 200)
+                        //closeButton.layer.position = CGPoint(x: 60, y: 200)
                                                }
                      }
                  
