@@ -15,9 +15,11 @@ class LogInViewController: UIViewController {
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         contentView.addSubview(emailTextField)
+        
         contentView.addSubview(passTextField)
         contentView.addSubview(logoImageView)
         contentView.addSubview(errorLabel)
+        
         contentView.addSubview(button)
         layout()
     }
@@ -129,8 +131,11 @@ class LogInViewController: UIViewController {
     
     var errorLabel: UILabel = {
     let label = UILabel()
-        label.backgroundColor = .red
+        label.textColor = .red
+        label.font = label.font.withSize(8)
         label.isHidden = true
+        label.text = "Password less than 7 symbols"
+        label.translatesAutoresizingMaskIntoConstraints = false
     return label
     }()
     
@@ -162,18 +167,18 @@ class LogInViewController: UIViewController {
         passTextField.rightAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.rightAnchor, constant: -16).isActive = true
         passTextField.leftAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leftAnchor, constant: 16).isActive = true
         passTextField.heightAnchor.constraint(equalToConstant: 50).isActive = true
-      //  passTextField.bottomAnchor.constraint(equalTo: errorLabel.topAnchor).isActive = true
+        passTextField.bottomAnchor.constraint(equalTo: errorLabel.topAnchor).isActive = true
         
-//        errorLabel.topAnchor.constraint(equalTo: passTextField.bottomAnchor, constant: 1).isActive = true
-//        errorLabel.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -16).isActive = true
-//        errorLabel.leftAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leftAnchor, constant: 16).isActive = true
-      //  errorLabel.bottomAnchor.constraint(equalTo: button.topAnchor, constant: 16).isActive = true
+        errorLabel.topAnchor.constraint(equalTo: passTextField.bottomAnchor, constant: 2).isActive = true
+        errorLabel.bottomAnchor.constraint(equalTo: button.topAnchor, constant: 3).isActive = true
+        errorLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+        errorLabel.heightAnchor.constraint(equalToConstant: 10).isActive = true
         
-        button.topAnchor.constraint(equalTo: passTextField.bottomAnchor, constant: 16).isActive = true
+        button.topAnchor.constraint(equalTo: errorLabel.topAnchor, constant: 16).isActive = true
         button.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -16).isActive = true
         button.leftAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leftAnchor, constant: 16).isActive = true
         button.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        button.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        button.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor).isActive = true
 
         
     }
@@ -183,6 +188,7 @@ class LogInViewController: UIViewController {
         let vc = ProfileViewController()
         emailTextField.layer.borderColor = UIColor.black.cgColor
         passTextField.layer.borderColor = UIColor.black.cgColor
+        self.errorLabel.isHidden = true
         
         let alertController = UIAlertController(title: "Can't login", message: "Your login or password incorrect", preferredStyle: .alert)
         let yesAction = UIAlertAction(title: "Ok", style: .default) { (action) -> Void in
@@ -195,31 +201,34 @@ class LogInViewController: UIViewController {
             self.emailTextField.layer.borderColor = UIColor.red.cgColor })
         
         let passAnimator = UIViewPropertyAnimator(duration: 0.5, curve: .easeOut, animations: {
-            self.passTextField.layer.borderColor = UIColor.red.cgColor })
+            self.passTextField.layer.borderColor = UIColor.red.cgColor
+            self.errorLabel.layer.borderColor = UIColor.red.cgColor
+        })
         
         emailAnimator.stopAnimation(true)
         passAnimator.stopAnimation(true)
         
         
-//        if emailTextField.text == "" || emailTextField.text == "Email or phone" {
-//            emailAnimator.startAnimation()
-//        }
-//
-//        if passTextField.text?.count ?? 0 < 6 || passTextField.text == "Password" {
-//            passAnimator.startAnimation()
-//            errorLabel.isHidden = false
-//        }
-//
-//
-//        if  emailTextField.text != "" && emailTextField.text != "Email or phone" && passTextField.text?.count ?? 0 >= 7 && emailTextField.text != "your@mail.com" && passTextField.text != "1234567" {
-//            present(alertController, animated: true)
-//
-//        } else { if emailTextField.text == "your@mail.com" && passTextField.text == "1234567" {
-//                navigationController?.pushViewController(vc, animated: true)
-//
-//            }
-//        }
-        navigationController?.pushViewController(vc, animated: true)
+        if emailTextField.text == "" || emailTextField.text == "Email or phone" {
+            emailAnimator.startAnimation()
+        }
+
+        if passTextField.text?.count ?? 0 < 6 || passTextField.text == "Password" {
+            errorLabel.isHidden = false
+            passAnimator.startAnimation()
+            
+        }
+
+
+        if  emailTextField.text != "" && emailTextField.text != "Email or phone" && passTextField.text?.count ?? 0 >= 7 && emailTextField.text != "your@mail.com" && passTextField.text != "1234567" {
+            present(alertController, animated: true)
+
+        } else { if emailTextField.text == "your@mail.com" && passTextField.text == "1234567" {
+                navigationController?.pushViewController(vc, animated: true)
+
+            }
+        }
+    //    navigationController?.pushViewController(vc, animated: true)
         //navigationController?.pushViewController(alertController, animated: true)
         
     }
