@@ -8,18 +8,23 @@
 import UIKit
 
 protocol CellActionsDelegate: AnyObject {
-    func Action()
+    func actionByCell()
+    
+    func custom(cell: PhotosCollectionViewCell, hadButton: UIButton)
+    
 }
 
+let navController = ProfileViewController()
+
 class PhotosTableViewCell: UITableViewCell {
-let gallery = PhotosViewController()
     
-    weak var delegate: CellActionsDelegate?
+    let gallery = PhotosViewController()
+     var delegate: CellActionsDelegate?
     
     private let photoButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.contentMode = .scaleAspectFit
+        button.contentMode = .scaleAspectFill
         button.tintColor = .black
         button.setBackgroundImage(UIImage(systemName: "arrow.right.square"), for: .normal)
         button.addTarget(self, action: #selector(tapGalleryButtonAction), for: .touchUpInside)
@@ -27,9 +32,8 @@ let gallery = PhotosViewController()
     }()
     
     private let photoLabel: UILabel = {
-        let label = UILabel()//frame: CGRect(x: 0, y: 0, width: 300, height: 900))
+        let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        //label.backgroundColor = .orange
         label.font = UIFont.boldSystemFont(ofSize: 24)
         return label
     }()
@@ -47,7 +51,6 @@ let gallery = PhotosViewController()
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.backgroundColor = .green
-      
         imageView.contentMode  = .scaleAspectFill
         imageView.layer.cornerRadius = 6
         imageView.clipsToBounds = true
@@ -76,11 +79,22 @@ let gallery = PhotosViewController()
         layout()
         
     }
-    
-    @objc private func tapGalleryButtonAction() {
-    
-      //  delegate?.Action()
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+       
+    func actionByCell() {
         
+    }
+    
+    @objc private func tapGalleryButtonAction(sender: UIButton) {
+        let vc = PhotosCollectionViewCell()
+        actionByCell()
+        //vc.custom()
+        if let d = self.delegate { d.custom(cell: vc, hadButton: sender) }
+        
+// func custom(cell: PhotosCollectionViewCell, hadButton: UIButton, withInfo: [String:Any]?)
+        print("Uknonw actions")
     }
     
     func setupPhotoCell(text: String) {
@@ -92,23 +106,7 @@ let gallery = PhotosViewController()
         contentView.backgroundColor = .white
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-//    override func awakeFromNib() {
-//        super.awakeFromNib()
-//        // Initialization code
-//    }
 
-//    override func setSelected(_ selected: Bool, animated: Bool) {
-//        super.setSelected(selected, animated: animated)
-//
-//        // Configure the view for the selected state
-//    }
-
-    
-    
     private func layout() {
         
         let screenSize: CGRect = UIWindow().frame
@@ -127,7 +125,7 @@ let gallery = PhotosViewController()
         NSLayoutConstraint.activate([
             photoLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: screenOffset),
             photoLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: screenOffset),
-        
+            
             photoButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: screenOffset),
             photoButton.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -screenOffset),
             photoButton.bottomAnchor.constraint(equalTo: postImageView.topAnchor, constant: -screenOffset),
@@ -138,7 +136,7 @@ let gallery = PhotosViewController()
             postImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             postImageView.widthAnchor.constraint(equalToConstant: width),
             postImageView.heightAnchor.constraint(equalToConstant: width),
-
+            
             postImageSecond.topAnchor.constraint(equalTo: photoLabel.bottomAnchor, constant: offset),
             postImageSecond.leftAnchor.constraint(equalTo: postImageView.rightAnchor, constant: offset),
             postImageSecond.rightAnchor.constraint(equalTo: postImageThird.leftAnchor, constant: -offset),
@@ -161,5 +159,5 @@ let gallery = PhotosViewController()
             postImageFifth.heightAnchor.constraint(equalToConstant: width),
         ])
     }
-
+    
 }

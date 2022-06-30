@@ -10,17 +10,6 @@ import UIKit
 class ProfileTableHederView: UIView, UIGestureRecognizerDelegate {
 
     let screenSize: CGRect = UIWindow().frame
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupGestures()
-        layout()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     var animator = UIViewPropertyAnimator()
     
     var fieldView: UIView = {
@@ -32,35 +21,31 @@ class ProfileTableHederView: UIView, UIGestureRecognizerDelegate {
     
     var avatarImageView: UIButton = {
         let view = UIButton()
-       // view.image = UIImage(named: "Vinchi-Leonardo-Da")
         view.setBackgroundImage(UIImage(named: "Vinchi-Leonardo-Da"), for: .normal)
-        //view.contentMode = .scaleAspectFit
         view.clipsToBounds = true
         view.layer.masksToBounds = true
         view.layer.borderWidth = 3
         view.layer.borderColor = UIColor.white.cgColor
         view.layer.cornerRadius = 50
         view.translatesAutoresizingMaskIntoConstraints = false
-     //   view.addTarget(self, action: #selector(tapAvatarAction), for: .touchUpInside)
-        //view.delegate
         return view
     }()
     
     var fullNameLabel: UILabel = {
-    let view = UILabel()
-    view.text = "Leonardo Da Vinci"
-    view.font = UIFont(name: "Helvetica-Bold", size: 18)
-    view.translatesAutoresizingMaskIntoConstraints = false
-    return view
-}()
+        let view = UILabel()
+        view.text = "Leonardo Da Vinci"
+        view.font = UIFont(name: "Helvetica-Bold", size: 18)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
     
     var statusLabel: UILabel = {
-    let view = UILabel()
-    view.text = "Learning never exhausts the mind."
-    view.font = UIFont(name: "Helvetica", size: 14)
-    view.translatesAutoresizingMaskIntoConstraints = false
-    return view
-}()
+        let view = UILabel()
+        view.text = "Learning never exhausts the mind."
+        view.font = UIFont(name: "Helvetica", size: 14)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
     
     var statusTextField: UITextField = {
         let view = UITextField()
@@ -87,6 +72,7 @@ class ProfileTableHederView: UIView, UIGestureRecognizerDelegate {
         button.layer.shadowOffset = CGSize(width: 34, height: 34)
         button.layer.shadowRadius = 104
         button.layer.shadowColor = UIColor.yellow.cgColor
+        button.addTarget(self, action: #selector(setStatusAction), for: .touchUpInside)
         button.layer.shadowOpacity = 0.7
         return button
     }()
@@ -105,10 +91,18 @@ class ProfileTableHederView: UIView, UIGestureRecognizerDelegate {
         button.tintColor = .white
         button.layer.position = CGPoint(x: 50, y: 200)
         button.setBackgroundImage(UIImage(systemName: "xmark.circle"), for: .normal)
- //       button.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
         return button
     }()
     
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupGestures()
+        layout()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     func setupHeader(text: String) {
      //   statusLabel.text = text
@@ -124,12 +118,22 @@ class ProfileTableHederView: UIView, UIGestureRecognizerDelegate {
         blackView.addGestureRecognizer(closeBlackView)
     }
     
+    @objc private func setStatusAction (){
+        if statusTextField.text == "" {
+            UIView.animate(withDuration: 1.0,
+                                    delay: 0.0,
+                                    usingSpringWithDamping: 2.5,
+                                    initialSpringVelocity: 1.3,
+                           options: .beginFromCurrentState) { [self] in statusTextField.layer.borderColor = UIColor.red.cgColor } completion: { _ in self.statusTextField.layer.borderColor = UIColor.black.cgColor
+            }
+        }
+        statusLabel.text = statusTextField.text
+    }
     
     @objc private func closeBlackAction() {
         print("Нажатие на черную View")
         self.closeButton.removeFromSuperview()
         self.blackView.removeFromSuperview()
-        //self.avatarImageView.alpha = 0
         UIView.animate(withDuration: 1.0,
                                 delay: 0.0,
                                 usingSpringWithDamping: 2.5,
@@ -143,28 +147,16 @@ class ProfileTableHederView: UIView, UIGestureRecognizerDelegate {
 
     }
     
-//    @objc private func closeAvatar() {
-//
-//        print("closed from BlackView")
-//        //closeButton.removeFromSuperview()
-//        //self.layoutIfNeeded()
-//
-//    }
-    
-    
     @objc private func tapAvatarAction() {
         print("We are in tapAction on Avatar")
         superview?.addSubview(blackView)
-    //    self.removeFromSuperview()
         blackView.frame = UIWindow().frame
         blackView.layer.frame = UIWindow().frame
         blackView.becomeFirstResponder()
-        //blackView.hitTest(CGPoint(x: 0, y: 0), with: nil)
         avatarImageView.frame = CGRect(x: 0, y: 0, width: 300, height: 800)
         addSubview(avatarImageView)
         avatarImageView.alpha = 1
-        // if isUserInteractionEnabled == true { print("works ")}
-        
+
         UIView.animate(withDuration: 1.0,
                                 delay: 0.0,
                                 
@@ -177,7 +169,6 @@ class ProfileTableHederView: UIView, UIGestureRecognizerDelegate {
                  } completion:
                     { _ in UIView.animate(withDuration: 0.2,delay: 0.0) { [self] in addSubview(closeButton)
                         print("exit from animation")
-                        //closeButton.layer.position = CGPoint(x: 60, y: 200)
                                                }
                      }
                  

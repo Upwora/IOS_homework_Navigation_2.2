@@ -7,10 +7,11 @@
 
 import UIKit
 
+
 class PhotosViewController: UIViewController {
     
     private lazy var verticalCollection = makeCollectionView(scrollDirection: .vertical)
-
+    var postArray = Post.postView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,7 +74,7 @@ extension PhotosViewController: UICollectionViewDataSource {
         case verticalCollection:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotosCollectionViewCell.identifier, for: indexPath) as! PhotosCollectionViewCell
             cell.newImageView.image = UIImage(named: galleryFile[indexPath.item])
-            print(indexPath.item)
+            print("Show items: ",indexPath.item)
             cell.doFirst(color: .orange)
             return cell
         default:
@@ -109,10 +110,40 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         sideInset
     }
+
+
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath.section, indexPath.item)
+        print("Pressed ",indexPath.section, indexPath.item)
+        //print(#function)
+        let vc = PhotosViewController()
+        
+        let currentViewController = UIApplication.shared.keyWindow?.rootViewController
+//        currentViewController?.dismiss(animated: true, completion: nil)
+        
+        
+        self.navigationController?.pushViewController(vc, animated: true)
+        
+//        if indexPath.item == 0 {
+//            print("Zero ")
+//            navigationController?.pushViewController(vc, animated: true)
+//            currentViewController?.present(vc, animated: true, completion: nil)
+//        }
+//
+//
+//        vc.view.backgroundColor = .orange
+//        vc.view.frame = CGRect(x: 0, y: 0, width: 200, height: 700)
+    
+//        navigationController?.pushViewController(vc, animated: true)
+//        UIView.animate(withDuration: 1.0,
+//                                delay: 0.0,
+//                                usingSpringWithDamping: 2.5,
+//                                initialSpringVelocity: 1.3,
+//                       options: .beginFromCurrentState) { [self] in UIImage(galleryFile[indexPath.item]). = UIColor.red.cgColor } completion: { _ in self.statusTextField.layer.borderColor = UIColor.black.cgColor }
     }
+    
+    
+    
 }
 
 

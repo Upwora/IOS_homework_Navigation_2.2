@@ -7,36 +7,38 @@
 
 import UIKit
 
-extension UIGestureRecognizerDelegate {
-    func setupGestures(){}
-}
 
 class ProfileViewController: UIViewController, CellActionsDelegate, UIGestureRecognizerDelegate {
-   
-    func Action() {
-        print("Arrow Pressed")
-        let vc = PhotosViewController()
-        navigationController?.pushViewController(vc, animated: true)
+    func custom(cell: PhotosCollectionViewCell, hadButton: UIButton) {
+        
     }
     
-
+    
+//    func custom(cell: PostTableViewCell, hadButton: UIButton, pressedAt: IndexPath, withInfo: [String : Any]?) {
+//        //hadButton.addTarget(<#T##target: Any?##Any?#>, action: <#T##Selector#>, for: <#T##UIControl.Event#>)
+//    }
+    
     private let post: [[Post]] = Post.postView()
     
     var animator = UIViewPropertyAnimator()
-    
+
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.dataSource = self
         tableView.delegate = self
-       
+        
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.identifier)
         tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: PhotosTableViewCell.identifier)
         
         return tableView
     }()
-
-   
+    
+    func actionByCell() {
+        print("Arrow Pressed")
+        let vc = PhotosViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,20 +58,28 @@ class ProfileViewController: UIViewController, CellActionsDelegate, UIGestureRec
     }
 }
 
+
+extension UIGestureRecognizerDelegate {
+    func setupGestures(){}
+}
+
 extension ProfileViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = ProfileTableHederView()
         if section == 0 { return header } else { return UIView() }
-
+        
     }
-
+    
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
-        let detailVC = PhotosViewController()
-     //   present(detailVC, animated: true)
-        navigationController?.pushViewController(detailVC, animated: true)
-
+        
+        //let detailVC = PhotosViewController()
+        let postView = PostViewController(post: post[indexPath.item])
+        print("INDEX__________________________________________________",indexPath.item)
+        //   present(detailVC, animated: true)
+        navigationController?.pushViewController(postView, animated: true)
+        
     }
 }
 
@@ -82,7 +92,6 @@ extension ProfileViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return [post].count
     }
-
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -90,18 +99,21 @@ extension ProfileViewController: UITableViewDataSource {
         photoCell.delegate = self
         let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.identifier, for: indexPath) as! PostTableViewCell
         
-        
+        cell.delegate = self
         var context: UIListContentConfiguration = cell.defaultContentConfiguration()
-        context.text = "Photo" //"Секция = \(indexPath.section), ячейка = \(indexPath.row)"
+        context.text = "Photo"
         cell.setupCell(post[indexPath.section][indexPath.row])
         
         var photoContext: UIListContentConfiguration = photoCell.defaultContentConfiguration()
-        photoContext.text = "Photos" //"Секция = \(indexPath.section), ячейка = \(indexPath.row)"
+        photoContext.text = "Photos"
         
         photoCell.setupPhotoCell(text:  photoContext.text ?? "default")
         
-        if indexPath.section == 0 { return photoCell } else
-        { return cell }
+        if indexPath.section == 0 {
+            return photoCell
+            
+        } else
+            { return cell }
         
     }
 }

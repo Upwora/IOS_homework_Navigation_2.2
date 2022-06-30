@@ -40,6 +40,7 @@ extension UIViewController {
         collection.translatesAutoresizingMaskIntoConstraints = false
         collection.backgroundColor = .systemGray3
         collection.register(PhotosCollectionViewCell.self, forCellWithReuseIdentifier: PhotosCollectionViewCell.identifier)
+        collection.register(FullScreenViewController.self, forCellWithReuseIdentifier: FullScreenViewController.identifier)
         return collection
     }
 }

@@ -9,9 +9,13 @@ import UIKit
 
 class PostViewController: UIViewController {
     
-    init(post: Post) {
+    let cellForPost = PostTableViewCell()
+    
+    
+    init(post: [Post]) {
         super.init(nibName: nil, bundle: nil)
-        self.title = post.title
+        //var post = Post.postView()
+        
     }
     
     required init?(coder: NSCoder) {
@@ -20,9 +24,15 @@ class PostViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.addSubview(cellForPost)
         view.backgroundColor = .purple
-
+        navigationController?.navigationBar.isHidden = false
+        
     }
-
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        
+        navigationController?.navigationBar.isHidden = true
+    }
 
 }
